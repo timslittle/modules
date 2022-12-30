@@ -1,51 +1,52 @@
 name: "rnaquast"
-## TODO nf-core: Add a description of the module and list keywords
-description: write your description here
+description: Assess the quality of an RNAseq assembly with or without a reference genome
 keywords:
-  - sort
+  - rna assembly
+  - rnaseq
+  - de novo
+  - quality control
 tools:
   - "rnaquast":
-      ## TODO nf-core: Add a description and other details for the software below
       description: "rnaQUAST is a tool for evaluating RNA-Seq assemblies using reference genome and gene database. In addition, rnaQUAST is also capable of estimating gene database coverage by raw reads and de novo quality assessment using third-party software."
-      homepage: "None"
-      documentation: "None"
-      tool_dev_url: "None"
-      doi: ""
+      homepage: "https://cab.spbu.ru/software/rnaquast/"
+      documentation: "http://cab.spbu.ru/files/rnaquast/release2.2.2/manual.html"
+      tool_dev_url: "https://github.com/ablab/rnaquast"
+      doi: "10.1093/bioinformatics/btw218"
       licence: "['GPL v2']"
 
-## TODO nf-core: Add a description of all of the variables used as input
 input:
-  # Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  #
-  ## TODO nf-core: Delete / customise this example input
-  - bam:
+  - assembly:
       type: file
-      description: BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: fasta file
+      pattern: "*.{fasta,fa}"
 
-## TODO nf-core: Add a description of all of the variables used as output
 output:
-  #Only when we have meta
   - meta:
       type: map
       description: |
         Groovy Map containing sample information
         e.g. [ id:'test', single_end:false ]
-  #
   - versions:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  ## TODO nf-core: Delete / customise this example output
-  - bam:
+  - summary_txt:
       type: file
-      description: Sorted BAM/CRAM/SAM file
-      pattern: "*.{bam,cram,sam}"
+      description: Summary statistics text files
+      pattern: "*.{txt}"
+  - transcripts:
+      type: file
+      description: Transcript files which are correct/misaligned/etc...
+      pattern: "*.{fasta}"
+  - plots:
+      type: file
+      description: Plots of summary statistics
+      pattern: "*.{png}"
 
 authors:
   - "None"
