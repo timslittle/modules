@@ -25,12 +25,7 @@ process RNAQUAST {
     def busco_lineage = params.busco_lineage ? "--busco_lineage ${params.busco_lineage}" : ""
     def gene_mark = params.gene_mark ? "--gene_mark" : ""
     def strandedness = (meta.strandedness == "unstranded") ? "" : "--strand_specific"
-
-    // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
-    //               If the software is unable to output a version number on the command-line then it can be manually specified
-    //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
-    //               Each software used MUST provide the software name and version number in the YAML version file (versions.yml)
-    """
+    """ 
     rnaQUAST.py \\
         --output_dir $workflow.workDir \\
         --transcripts $assembly \\
