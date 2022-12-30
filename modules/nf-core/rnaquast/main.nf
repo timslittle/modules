@@ -31,18 +31,21 @@ process RNAQUAST {
     //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
     //               Each software used MUST provide the software name and version number in the YAML version file (versions.yml)
     """
-    python rnaQUAST.py \\
-        --transcipts $assembly \\
+    rnaQUAST.py \\
+        --output_dir $workflow.workDir \\
+        --transcripts $assembly \\
         --threads $task.cpus \\
         --labels $prefix \\
         $reference \\
         $gtf \\
+        $busco_lineage \\
+        $gene_mark \\
         $strandedness \\
         $args
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
-        rnaquast: \$(echo \$(python rnaQuast.py -h 2>&1) | sed 's/^.*rnaQUAST //; s/Using.*\$//' ))
+        rnaquast: \$(echo \$(rnaQUAST.py -h 2>&1) | sed 's/^.*rnaQUAST //; s/Using.*\$//' ))
     END_VERSIONS
     """
 }
