@@ -35,18 +35,10 @@ output:
       type: file
       description: File containing software versions
       pattern: "versions.yml"
-  - summary_txt:
-      type: file
-      description: Summary statistics text files
-      pattern: "*.{txt}"
-  - transcripts:
-      type: file
-      description: Transcript files which are correct/misaligned/etc...
-      pattern: "*.{fasta}"
-  - plots:
-      type: file
-      description: Plots of summary statistics
-      pattern: "*.{png}"
+  - rnaquast_dir:
+      type: directory
+      description: Summary statistics output directory
+      pattern: "comparison_output/*"
 
 authors:
-  - "None"
+  - "timslittle"

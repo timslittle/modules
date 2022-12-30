@@ -11,10 +11,8 @@ process RNAQUAST {
     tuple val(meta), path(assembly)
 
     output:
-    tuple val(meta), path("*.txt")  , emit: summary_txt
-    tuple val(meta), path("*.fasta"), emit: transcripts
-    tuple val(meta), path("*.png")  , emit: plots
-    path "versions.yml"             , emit: versions
+    tuple val(meta), path("comparison_output/*"), emit: rnaquast_dir
+    path "versions.yml"                         , emit: versions
 
     when:
     task.ext.when == null || task.ext.when
