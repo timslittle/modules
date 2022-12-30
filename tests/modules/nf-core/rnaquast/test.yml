@@ -1,0 +1,11 @@
+## TODO nf-core: Please run the following command to build this file:
+#                nf-core modules create-test-yml rnaquast
+- name: "rnaquast"
+  command: nextflow run ./tests/modules/nf-core/rnaquast -entry test_rnaquast -c ./tests/config/nextflow.config -c ./tests/modules/nf-core/rnaquast/nextflow.config
+  tags:
+    - "rnaquast"
+  files:
+    - path: "output/rnaquast/test.bam"
+      md5sum: e667c7caad0bc4b7ac383fd023c654fc
+    - path: "output/rnaquast/versions.yml"
+      md5sum: a01fe51bc4c6a3a6226fbf77b2c7cf3b

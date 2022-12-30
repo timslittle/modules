@@ -2403,6 +2403,10 @@ rmarkdownnotebook:
   - modules/nf-core/rmarkdownnotebook/**
   - tests/modules/nf-core/rmarkdownnotebook/**
 
+rnaquast:
+  - modules/nf-core/rnaquast/**
+  - tests/modules/nf-core/rnaquast/**
+
 roary:
   - modules/nf-core/roary/**
   - tests/modules/nf-core/roary/**
