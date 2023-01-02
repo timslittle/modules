@@ -40,6 +40,7 @@ process DETONATE {
     def prefix = task.ext.prefix ?: "${meta_rnaseq.id}"
     def read_length = params.read_length ?: 76 
     if(!read_length){ log.warn("detonate: Average read length not specified, defaulting to 76nt") }
+    // TODO Calculate average read length?
     def transcript_length_parameters = params.transcript_length_parameters ? "--transcript-length-parameters ${params.transcript_length_parameters}" : ""
 
     if (meta_rnaseq.single_end){
