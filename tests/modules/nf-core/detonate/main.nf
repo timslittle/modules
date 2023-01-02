@@ -4,12 +4,22 @@ nextflow.enable.dsl = 2
 
 include { DETONATE } from '../../../../modules/nf-core/detonate/main.nf'
 
-workflow test_detonate {
+workflow test_detonate_pairedEnd {
     
-    input = [
+    rnaseq = [
         [ id:'test', single_end:false ], // meta map
-        file(params.test_data['sarscov2']['illumina']['test_paired_end_bam'], checkIfExists: true)
+        [
+            file(params.test_data['sarscov2']['illumina']['test_1_fastq_gz'], checkIfExists: true),
+            file(params.test_data['sarscov2']['illumina']['test_2_fastq_gz'], checkIfExists: true)
+        ]
     ]
 
-    DETONATE ( input )
+    fasta = [
+        [ id:'test', single_end:false ], // meta map
+        [
+            file(params.test_data['sarscov2']['genomics']['transcriptome_fasta'], checkIfExists: true)
+        ]
+    ]
+
+    DETONATE ( rnaseq, fasta )
 }

@@ -25,8 +25,8 @@ process DETONATE {
         'quay.io/biocontainers/detonate:1.11--hae1ec2f_3' }"
 
     input:
-    tuple val(meta), path(rnaseq)
-    tuple val(meta), path(fasta)
+    tuple val(meta_rnaseq), path(rnaseq)
+    tuple val(meta_fasta), path(fasta)
 
     output:
     tuple val(meta), path("*.score"), emit: score
@@ -37,9 +37,15 @@ process DETONATE {
 
     script:
     def args = task.ext.args ?: ''
-    def prefix = task.ext.prefix ?: "${meta.id}"
+    def prefix = task.ext.prefix ?: "${meta_rnaseq.id}"
     def read_length = params.read_length ?: { 76 ; log.warn("detonate: Average read length not specified, defaulting to 76nt") }
     def transcript_length_parameters = params.transcript_length_parameters ? "--transcript-length-parameters ${params.transcript_length_parameters}" : ""
+
+    if (meta_rnaseq.single_end){
+        rnaseq_reads = rnaseq
+    } else {
+        rnaseq_reads = "--paired_end ${rnaseq}"
+    }
     // TODO nf-core: Where possible, a command MUST be provided to obtain the version number of the software e.g. 1.10
     //               If the software is unable to output a version number on the command-line then it can be manually specified
     //               e.g. https://github.com/nf-core/modules/blob/master/modules/nf-core/homer/annotatepeaks/main.nf
@@ -47,7 +53,7 @@ process DETONATE {
     // TODO nf-core: It MUST be possible to pass additional parameters to the tool as a command-line string via the "task.ext.args" directive
     """
     ./rsem-eval/rsem-eval-calculate-score \\
-        $rnaseq \\
+        $rnaseq_reads \\
         $fasta \\
         $prefix \\
         $read_length \\
