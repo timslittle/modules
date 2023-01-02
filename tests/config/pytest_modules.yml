@@ -807,6 +807,10 @@ deseq2/differential:
   - modules/nf-core/deseq2/differential/**
   - tests/modules/nf-core/deseq2/differential/**
 
+detonate:
+  - modules/nf-core/detonate/**
+  - tests/modules/nf-core/detonate/**
+
 diamond/blastp:
   - modules/nf-core/diamond/blastp/**
   - tests/modules/nf-core/diamond/blastp/**
