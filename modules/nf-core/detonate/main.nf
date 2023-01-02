@@ -16,8 +16,8 @@
 //               list (`[]`) instead of a file can be used to work around this issue.
 
 process DETONATE {
-    tag "$meta.id"
-    label 'process_medium'
+    tag "$meta_rnaseq.id"
+    label 'process_high'
 
     conda (params.enable_conda ? "bioconda::detonate=1.11" : null)
     container "${ workflow.containerEngine == 'singularity' && !task.ext.singularity_pull_docker_container ?
@@ -38,7 +38,8 @@ process DETONATE {
     script:
     def args = task.ext.args ?: ''
     def prefix = task.ext.prefix ?: "${meta_rnaseq.id}"
-    def read_length = params.read_length ?: { 76 ; log.warn("detonate: Average read length not specified, defaulting to 76nt") }
+    def read_length = params.read_length ?: 76 
+    if(!read_length){ log.warn("detonate: Average read length not specified, defaulting to 76nt") }
     def transcript_length_parameters = params.transcript_length_parameters ? "--transcript-length-parameters ${params.transcript_length_parameters}" : ""
 
     if (meta_rnaseq.single_end){

@@ -17,7 +17,7 @@ workflow test_detonate_pairedEnd {
     fasta = [
         [ id:'test', single_end:false ], // meta map
         [
-            file(params.test_data['sarscov2']['genomics']['transcriptome_fasta'], checkIfExists: true)
+            file(params.test_data['sarscov2']['genome']['transcriptome_fasta'], checkIfExists: true)
         ]
     ]
 
